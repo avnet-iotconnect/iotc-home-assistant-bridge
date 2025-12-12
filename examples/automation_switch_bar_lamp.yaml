@@ -1,0 +1,14 @@
+# Automation: Mirror bar lamp (switch.bar_lamp) state to MQTT as numeric 0/1 (Option A)
+
+alias: Mirror bar lamp to MQTT (numeric)
+trigger:
+  - platform: state
+    entity_id: switch.bar_lamp
+action:
+  - service: mqtt.publish
+    data:
+      topic: ha/lights/bar_lamp
+      payload_template: >
+        {"value": {{ 1 if is_state('switch.bar_lamp', 'on') else 0 }},
+         "source": "switch.bar_lamp"}
+mode: single

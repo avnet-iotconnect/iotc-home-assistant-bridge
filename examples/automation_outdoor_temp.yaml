@@ -1,0 +1,14 @@
+# Automation: Publish outdoor temperature to MQTT every 30 seconds (Option A telemetry)
+
+alias: Publish outdoor temperature to MQTT
+trigger:
+  - platform: time_pattern
+    seconds: "*/30"
+action:
+  - service: mqtt.publish
+    data:
+      topic: ha/metrics/outdoor_temp
+      payload_template: >
+        {"value": {{ state_attr('weather.forecast_home', 'temperature') | float(0) }},
+         "source": "weather.forecast_home.temperature"}
+mode: single

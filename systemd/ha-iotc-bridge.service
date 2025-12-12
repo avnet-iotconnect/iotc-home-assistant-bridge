@@ -1,0 +1,16 @@
+[Unit]
+Description=Home Assistant IoTConnect Bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/home-assistant-iotconnect-bridge
+ExecStart=/usr/bin/python3 /opt/home-assistant-iotconnect-bridge/ha_iotc_bridge.py
+Restart=on-failure
+RestartSec=5
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

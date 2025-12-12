@@ -1,0 +1,29 @@
+# Example configuration.yaml snippet (OPTIONAL) - mqtt_statestream
+#
+# mqtt_statestream is useful for "everything has a topic", but it publishes lots
+# of metadata (friendly_name, last_changed, timestamps) that may not map cleanly
+# to typed IoTConnect telemetry. For analytics, prefer Option A automations.
+
+default_config:
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+mqtt_statestream:
+  base_topic: ha/statestream
+  publish_attributes: true
+  publish_timestamps: true
+  include:
+    domains:
+      - sensor
+      - binary_sensor
+      - weather
+      - sun
+      - person
+      - update
+      - todo
+      - zone
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml

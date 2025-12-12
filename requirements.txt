@@ -1,0 +1,3 @@
+iotconnect-sdk-lite
+paho-mqtt
+requests

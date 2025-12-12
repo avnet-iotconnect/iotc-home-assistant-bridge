@@ -1,0 +1,15 @@
+# Automation: Mirror kitchen lights state to MQTT
+
+alias: Mirror kitchen lights state to MQTT
+trigger:
+  - platform: state
+    entity_id: light.kitchen_lights
+action:
+  - service: mqtt.publish
+    data:
+      topic: ha/lights/kitchen_lights
+      payload_template: >
+        {"value": "{{ 1 if is_state('light.kitchen_lights', 'on') else 0 }}",
+         "state": "{{ states('light.kitchen_lights') }}",
+         "source": "light.kitchen_lights"}
+mode: single
