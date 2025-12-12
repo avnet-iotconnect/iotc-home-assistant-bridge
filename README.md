@@ -40,12 +40,17 @@ Home Assistant -> (Automations + MQTT) -> Mosquitto -> ha_iotc_bridge.py -> IoTC
 
 Helpful screenshots (public links):
 
-```text
-https://www.home-assistant.io/images/installation/rpi_imager_start.png
-https://www.home-assistant.io/images/installation/rpi-ha.webp
-https://www.home-assistant.io/images/installation/rpi-select-sd-card.png
-https://www.home-assistant.io/images/installation/rpi_choose_next.png
-```
+**Raspberry Pi Imager start screen**  
+![Raspberry Pi Imager start screen](https://www.home-assistant.io/images/installation/rpi_imager_start.png "Raspberry Pi Imager start screen")
+
+**Home Assistant OS selection (Raspberry Pi)**  
+![Home Assistant OS selection (Raspberry Pi)](https://www.home-assistant.io/images/installation/rpi-ha.webp "Home Assistant OS selection (Raspberry Pi)")
+
+**Select SD card / storage**  
+![Select SD card / storage](https://www.home-assistant.io/images/installation/rpi-select-sd-card.png "Select SD card / storage")
+
+**Choose Next / continue setup**  
+![Choose Next / continue setup](https://www.home-assistant.io/images/installation/rpi_choose_next.png "Choose Next / continue setup")
 
 After boot, open:
 
@@ -65,9 +70,8 @@ Install via:
 
 Example configuration screen:
 
-```text
-https://community-assets.home-assistant.io/original/4X/4/c/e/4ce34674bae7d3fbb99c54ecba528d0432f0b1fb.jpeg
-```
+**Advanced SSH & Web Terminal add-on configuration**  
+![Advanced SSH & Web Terminal add-on configuration](https://community-assets.home-assistant.io/original/4X/4/c/e/4ce34674bae7d3fbb99c54ecba528d0432f0b1fb.jpeg "Advanced SSH & Web Terminal add-on configuration")
 
 Notes:
 - Do **not** include leading/trailing spaces in the username (it can break user creation).
@@ -81,9 +85,8 @@ Install **Mosquitto broker** from the add-on store.
 
 Example configuration screen:
 
-```text
-https://community-assets.home-assistant.io/original/3X/5/c/5c510c23d557dfdd69eb86d88f726bd887d7e2b2.png
-```
+**Mosquitto broker add-on configuration**  
+![Mosquitto broker add-on configuration](https://community-assets.home-assistant.io/original/3X/5/c/5c510c23d557dfdd69eb86d88f726bd887d7e2b2.png "Mosquitto broker add-on configuration")
 
 Minimal config:
 
@@ -141,10 +144,11 @@ Topic (example): `ha/lights/kitchen_lights`
 
 Automation UI screenshots (generic references):
 
-```text
-https://community-assets.home-assistant.io/original/4X/5/e/6/5e6758592afd8b5bb538f83dc539f7872061c852.png
-https://community-assets.home-assistant.io/original/4X/6/6/a/66a88ff2a1957e7617a3dd3bb2d30bf44d862bee.png
-```
+**Automation UI example (screenshot 1)**  
+![Automation UI example (screenshot 1)](https://community-assets.home-assistant.io/original/4X/5/e/6/5e6758592afd8b5bb538f83dc539f7872061c852.png "Automation UI example (screenshot 1)")
+
+**Automation UI example (screenshot 2)**  
+![Automation UI example (screenshot 2)](https://community-assets.home-assistant.io/original/4X/6/6/a/66a88ff2a1957e7617a3dd3bb2d30bf44d862bee.png "Automation UI example (screenshot 2)")
 
 See the ready-to-copy YAML in:
 - `examples/automation_switch_bar_lamp.yaml`
@@ -171,9 +175,8 @@ This token is required for IoTConnect -> Home Assistant control (REST API calls)
 
 Profile page screenshot (public link):
 
-```text
-https://www.home-assistant.io/images/docs/authentication/profile.png
-```
+**Profile page (Long-Lived Access Tokens section)**  
+![Profile page (Long-Lived Access Tokens section)](https://www.home-assistant.io/images/docs/authentication/profile.png "Profile page (Long-Lived Access Tokens section)")
 
 Steps:
 - Click your user (lower-left) -> **Profile**
