@@ -1,12 +1,12 @@
-# Home Assistant IoTConnect Bridge
+# Home Assistant IOTCONNECT Bridge
 
-A reproducible reference implementation to bridge **Home Assistant** telemetry and control into **Avnet IoTConnect**.
+A reproducible reference implementation to bridge **Home Assistant** telemetry and control into **Avnet IOTCONNECT**.
 
 This project shows how to:
 
 - Publish Home Assistant “things” (entities) into MQTT in a clean, analytics-friendly way
-- Bridge MQTT telemetry into IoTConnect using the **IoTConnect Python Lite SDK**
-- Receive IoTConnect cloud-to-device commands and control Home Assistant via the REST API (example: switch/light on/off)
+- Bridge MQTT telemetry into IOTCONNECT using the **IOTCONNECT Python Lite SDK**
+- Receive IOTCONNECT cloud-to-device commands and control Home Assistant via the REST API (example: switch/light on/off)
 
 > This repo intentionally contains **no personal names and no credentials**. All secrets are placeholders.
 
@@ -14,7 +14,7 @@ This project shows how to:
 
 ## Repo layout
 
-- `ha_iotc_bridge.py` - MQTT -> IoTConnect telemetry bridge + C2D command handler
+- `ha_iotc_bridge.py` - MQTT -> IOTCONNECT telemetry bridge + C2D command handler
 - `requirements.txt` - Python dependencies for the bridge
 - `examples/` - Home Assistant YAML snippets you can paste/import
 - `systemd/` - Optional systemd service unit + instructions (for Linux hosts)
@@ -24,10 +24,10 @@ This project shows how to:
 ## Architecture
 
 ```text
-Home Assistant -> (Automations + MQTT) -> Mosquitto -> ha_iotc_bridge.py -> IoTConnect
+Home Assistant -> (Automations + MQTT) -> Mosquitto -> ha_iotc_bridge.py -> IOTCONNECT
                                             ^
                                             |
-                                     IoTConnect Commands
+                                     IOTCONNECT Commands
                                             |
                                        Home Assistant API
 ```
@@ -114,9 +114,9 @@ Typical settings:
 
 ---
 
-### 5) Option A telemetry: publish numeric state (recommended for IoTConnect)
+### 5) Option A telemetry: publish numeric state (recommended for IOTCONNECT)
 
-IoTConnect works best with typed numeric telemetry. For switches/lights, publish 0/1.
+IOTCONNECT works best with typed numeric telemetry. For switches/lights, publish 0/1.
 
 #### Bar lamp (TP-Link HS103 plug)
 - Entity ID: `switch.bar_lamp`
@@ -165,13 +165,13 @@ via `mqtt_statestream`.
 Example snippet is included at `examples/sample_configuration.yaml`.
 
 > Note: mqtt_statestream publishes many *strings/timestamps/metadata* topics. Those are great for debugging,
-> but don’t always map cleanly to typed IoTConnect attributes. Option A (above) is recommended for analytics.
+> but don’t always map cleanly to typed IOTCONNECT attributes. Option A (above) is recommended for analytics.
 
 ---
 
 ### 7) Create a Home Assistant Long-Lived Access Token
 
-This token is required for IoTConnect -> Home Assistant control (REST API calls).
+This token is required for IOTCONNECT -> Home Assistant control (REST API calls).
 
 Profile page screenshot (public link):
 
@@ -199,7 +199,7 @@ On the machine where you run the bridge:
 python3 -m pip install -r requirements.txt
 ```
 
-This bridge needs these local IoTConnect files next to `ha_iotc_bridge.py`:
+This bridge needs these local IOTCONNECT files next to `ha_iotc_bridge.py`:
 
 - `iotcDeviceConfig.json`
 - `device-cert.pem`
@@ -219,7 +219,7 @@ You should see MQTT messages and a “sent telemetry” debug print.
 
 ### 10) Dedicated variables per device (bar lamp / kitchen lights)
 
-If you only use a single `value` field in IoTConnect, multiple sources will compete.
+If you only use a single `value` field in IOTCONNECT, multiple sources will compete.
 This bridge also emits dedicated numeric fields:
 
 - `bar_lamp` (0/1)
@@ -229,7 +229,7 @@ based on:
 - `source == switch.bar_lamp` or topic `ha/lights/bar_lamp`
 - `source == light.kitchen_lights` or topic `ha/lights/kitchen_lights`
 
-In IoTConnect device template telemetry, add (recommended):
+In IOTCONNECT device template telemetry, add (recommended):
 - `bar_lamp` (Number)
 - `kitchen_lights` (Number)
 
@@ -241,7 +241,7 @@ Optionally also add for debugging:
 
 ---
 
-## IoTConnect commands (control)
+## IOTCONNECT commands (control)
 
 This bridge supports the following command names (either works):
 - `set-ha-light`
