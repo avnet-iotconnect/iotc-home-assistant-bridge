@@ -241,7 +241,7 @@ Optionally also add for debugging:
 
 ---
 
-## IOTCONNECT commands (control)
+### 11) IOTCONNECT commands (control)
 
 This bridge supports the following command names (either works):
 - `set-ha-light`
@@ -257,6 +257,94 @@ Examples:
   - `["switch.bar_lamp", "off"]`
 - Turn dimmer ON at half brightness:
   - `["light.kitchen_lights", "on", "128"]`
+
+---
+## How to install the IOTCONNECT bridge as a **native Home Assistant add-on**
+Running the bridge as a Home Assistant add-on ensures:
+
+- Automatic startup
+- Persistent credentials
+- Supervisor-managed restarts
+- Clean separation between code and configuration
+  
+### Runtime Files (Aligned with ha1.py)
+
+The bridge expects the following files at runtime:
+
+- `iotcDeviceConfig.json`
+- `device-cert.pem`
+- `device-pkey.pem`
+
+These files are read from the add-on data directory:
+
+```
+/data/addons/data/ha-iotc-bridge/
+```
+
+Inside the container, this path is mounted as:
+
+```
+/data
+```
+
+
+### Add-on Folder Layout
+
+```
+/addons/ha-iotc-bridge/
+├── app/
+│   ├── ha1.py
+│   ├── ha_iotc_bridge.py
+│   └── requirements.txt
+├── rootfs/
+│   └── etc/services.d/ha-iotc-bridge/run
+├── Dockerfile
+├── build.yaml
+└── config.json
+```
+
+
+### Add-on Configuration (`config.json`)
+
+The default entrypoint matches `ha1.py`:
+
+```json
+{
+  "options": {
+    "entrypoint": "ha1.py"
+  }
+}
+```
+
+This can be changed to `ha_iotc_bridge.py` without rebuilding the image.
+
+
+### Persistent Configuration
+
+Copy your IOTCONNECT credentials to:
+
+```bash
+/data/addons/data/ha-iotc-bridge/
+```
+
+Example:
+
+```bash
+cp iotcDeviceConfig.json /data/addons/data/ha-iotc-bridge/
+cp device-cert.pem      /data/addons/data/ha-iotc-bridge/
+cp device-pkey.pem      /data/addons/data/ha-iotc-bridge/
+```
+
+
+### Logs
+
+Logs are available through:
+
+- Home Assistant UI → Add-on → Logs
+- CLI:
+  ```bash
+  ha addons logs ha-iotc-bridge
+  ```
 
 ---
 
@@ -291,11 +379,3 @@ If running as a service, restart it after updating the token:
 ```bash
 sudo systemctl restart ha-iotc-bridge.service
 ```
-
----
-
-## Run as a service (optional)
-
-See:
-- `systemd/README.md`
-- `systemd/ha-iotc-bridge.service`
